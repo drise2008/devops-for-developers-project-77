@@ -1,0 +1,17 @@
+# ansible/group_vars/all.yml
+---
+# Приложение
+app_name: "my-hexlet-app"
+app_image: "drise2008/terraform-project:latest" 
+app_port: 8080
+
+# Docker
+docker_compose_version: "v2.20.0"
+
+# База данных (секреты брать из vault!)
+db_name: "{{ db_database_name }}"
+db_user: "{{ db_database_user }}"
+# db_password берётся из vault_vars.yml
+
+# Nginx
+nginx_upstream_servers: "{{ groups['webservers'] | map('extract', hostvars, 'ansible_host') | list }}"
